@@ -13,7 +13,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '14'   # Make sure this matches your Node.js version
+          node-version: '16'  # Set the version to 16 or higher
       - name: Install dependencies
         run: npm install
       - name: Run the linter
