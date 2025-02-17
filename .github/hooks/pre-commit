@@ -1,8 +1,9 @@
-#!/bin/bash
+#!/bin/sh
+# Vérifie que le code est valide avec ESLint avant de valider le commit.
 
-# Exécuter le linter (ajuste cette commande selon le linter utilisé)
-echo "Running linter..."
-eslint . || exit 1  # Si le linter échoue, empêcher le commit
+npx eslint . --ext .js --fix
 
-echo "Linter passed, proceeding with commit..."
-echo "HOOK ACTIVÉ !" >> hook_debug.log
+if [ $? -ne 0 ]; then
+  echo "Linting a échoué. Le commit est bloqué."
+  exit 1
+fi
