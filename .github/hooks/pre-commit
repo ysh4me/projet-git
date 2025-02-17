@@ -5,3 +5,4 @@ echo "Running linter..."
 eslint . || exit 1  # Si le linter échoue, empêcher le commit
 
 echo "Linter passed, proceeding with commit..."
+echo "HOOK ACTIVÉ !" >> hook_debug.log
