@@ -1,28 +1,26 @@
-name: Lint code
+name: Lint
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - feature/linter
 
 jobs:
   lint:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2  # This checks out your repository
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Specify the Node.js version you want
+          node-version: '14'
 
       - name: Install dependencies
         run: |
-          npm install  # Install the necessary dependencies
+          npm install
 
       - name: Run ESLint
-        run: npx eslint . --max-warnings=0  # Run ESLint and treat warnings as errors
+        run: |
+          npx eslint . --max-warnings=0
