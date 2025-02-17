@@ -1,2 +1,3 @@
-const foo=   42 
-console.log(foo)
+// test.js
+const foo= 5;
+if(foo==5){console.log("Bad formatting")}
