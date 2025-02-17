@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Ce projet utilise le workflow Git Flow.",
   "main": "Test.js",
+  "type": "module",
   "scripts": {
-    "type": "module"
+    // your other scripts here
   },
   "keywords": [],
   "author": "",
