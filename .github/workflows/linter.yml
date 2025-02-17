@@ -13,15 +13,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2  # This checks out your repository
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3  # Update to v3
+        uses: actions/setup-node@v2
         with:
-          node-version: '17'  # Set to Node.js version 17 or above
+          node-version: '16'  # Specify the Node.js version you want
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install  # Install the necessary dependencies
 
       - name: Run ESLint
-        run: npx eslint . --max-warnings=0
+        run: npx eslint . --max-warnings=0  # Run ESLint and treat warnings as errors
