@@ -1,21 +1,31 @@
 import { defineConfig } from "eslint-define-config";
 import eslintPluginPrettier from "eslint-plugin-prettier";
+import eslintConfigPrettier from "eslint-config-prettier";
 
-export default defineConfig({
-  languageOptions: {
-    parserOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
+export default defineConfig([
+  {
+    languageOptions: {
+      globals: {
+        structuredClone: "readonly", // Add structuredClone as a global variable
+      },
+      ecmaVersion: 12, // For ES2021 (ES2021 is version 12 in the ECMAScript specification)
+      sourceType: "module", // Set as module if you use ES modules
+    },
+    plugins: {
+      prettier: eslintPluginPrettier,
+    },
+    rules: {
+      "prettier/prettier": "error",
+      eqeqeq: "error", // Removed quotes
+      "space-infix-ops": ["error", { int32Hint: false }],
+      semi: ["error", "always"], // Removed quotes
+      "space-before-blocks": "error",
     },
   },
-  plugins: {
-    prettier: eslintPluginPrettier,
+  {
+    files: ["*.js"],
+    rules: {
+      ...eslintConfigPrettier.rules, // Apply Prettier formatting rules for JavaScript files
+    },
   },
-  rules: {
-    "prettier/prettier": "error", // Active Prettier pour le formatage automatique
-    eqeqeq: "error", // Exige l'utilisation de "===" au lieu de "=="
-    "space-infix-ops": ["error", { int32Hint: false }], // Exigences d’espaces autour des opérateurs
-    semi: ["error", "always"], // Exige le point-virgule à la fin des instructions
-    "space-before-blocks": "error", // Nécessite un espace avant les blocs
-  },
-});
+]);
