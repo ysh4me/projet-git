@@ -1,5 +1,4 @@
-const foo = 5;
-
-if (foo === 5) {
-  console.log("Bad formatting");
-}
+function test(){
+    console.log("Hello world")
+    }
+    
