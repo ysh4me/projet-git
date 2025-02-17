@@ -1,2 +1,4 @@
-const foo=   42 
-console.log(foo)
+const a = 5
+if (a == 5) {
+console.log('a est égal à 5')
+}
