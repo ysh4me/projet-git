@@ -1,0 +1,15 @@
+# New Feature: User Profile Update
+
+## Objective:
+- Add the ability for users to update their profile information.
+
+## Tasks:
+1. Implement an API endpoint to update user profile details.
+2. Create a form in the frontend for users to input new profile details.
+3. Add validation to ensure the new details are correct.
+4. Test the API and frontend integration.
+
+## Technologies:
+- Backend: PHP
+- Frontend: JavaScript, HTML, CSS
+- Database: MySQL
