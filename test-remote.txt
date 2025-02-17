@@ -1,0 +1,5 @@
+Ce fichier est créé pour tester le push vers les deux remotes :
+- origin (git@github.com:ysh4me/projet-git.git)
+- origin2 (git@github.com:bobiboriss/projet-git-remote2.git)
+
+Test : Configuration des remotes vérifiée avec succès !

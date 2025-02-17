@@ -3,15 +3,17 @@
   "version": "1.0.0",
   "description": "Ce projet utilise le workflow Git Flow.",
   "main": "Test.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "type": "module",
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^8.24.0",
-    "@typescript-eslint/parser": "^8.24.0",
-    "eslint": "^9.20.1"
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.1",
+    "eslint-define-config": "^2.1.0",
+    "globals": "^15.15.0",
+    "typescript-eslint": "^8.24.0"
   }
 }
