@@ -1,25 +1,16 @@
 name: Linter
-
 on:
   push:
     branches:
-      
-main
-develop
-pull_request:
-
+      - main
+      - develop
+  pull_request:
 jobs:
   lint:
     runs-on: ubuntu-latest
-
     steps:
-      
-name: Checkout code
-      uses: actions/checkout@v3
-
-      
-name: Lancer le linter
-      uses: wzieba/eslint-action@v2
-      with:
-        eslintConfig: '.eslintrc.json'
-        lintFilePatterns: '*/.js' 
+      - uses: actions/checkout@v3
+      - name: Installer les dépendances
+        run: npm install
+      - name: Lancer le linter
+        run: npx eslint .
