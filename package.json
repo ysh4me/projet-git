@@ -4,9 +4,7 @@
   "description": "Ce projet utilise le workflow Git Flow.",
   "main": "Test.js",
   "type": "module",
-  "scripts": {
-    // your other scripts here
-  },
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
