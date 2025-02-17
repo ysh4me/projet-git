@@ -5,16 +5,28 @@ on:
       - main
       - develop
   pull_request:
+
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Set the version to 16 or higher
+          node-version: '16'  # Ensure Node.js version is 16 or higher
+
+      - name: Debug Files (Check if package.json exists)
+        run: ls -la
+
       - name: Install dependencies
         run: npm install
+        working-directory: ${{ github.workspace }}
+
       - name: Run the linter
         run: npx eslint .
+        working-directory: ${{ github.workspace }}
