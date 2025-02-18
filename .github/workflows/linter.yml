@@ -1,32 +1,30 @@
 name: Linter
+
 on:
   push:
     branches:
       - main
-      - develop
+      - 'feature/*'
+      - 'bugfix/*'
   pull_request:
+    branches:
+      - main
 
 jobs:
-  lint:
+  linter:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
-          node-version: '16'  # Ensure Node.js version is 16 or higher
-
-      - name: Debug Files (Check if package.json exists)
-        run: ls -la
+          node-version: '14'
 
       - name: Install dependencies
         run: npm install
-        working-directory: ${{ github.workspace }}
 
-      - name: Run the linter
-        run: npx eslint .
-        working-directory: ${{ github.workspace }}
+      - name: Run linter
+        run: npm run lint
