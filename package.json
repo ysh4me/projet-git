@@ -4,18 +4,19 @@
   "description": "Ce projet utilise le workflow Git Flow.",
   "main": "Test.js",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.29.0",
-    "@typescript-eslint/parser": "^4.29.0",
-    "eslint": "^7.32.0",
-    "eslint-define-config": "^2.1.0",
-    "globals": "^15.15.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^15.4.3",
-    "typescript-eslint": "^8.24.0"
+    "@eslint/eslintrc": "^2.1.4",
+    "@eslint/js": "^8.57.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.3.3"
   }
 }
