@@ -1,0 +1,29 @@
+#!/bin/sh
+
+ 
+
+# Vérifie les fichiers modifiés
+
+FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|tsx|json|css|md)$')
+
+if [ -z "$FILES" ]; then
+
+  exit 0
+
+fi
+
+ 
+
+# Vérification avec Prettier
+
+prettier --check $FILES || { echo 'Corrigez le formatage avec Prettier.'; exit 1; }
+
+ 
+
+# Vérification avec ESLint
+
+eslint $FILES --quiet || { echo 'Corrigez les erreurs ESLint.'; exit 1; }
+
+ 
+
+exit 0
