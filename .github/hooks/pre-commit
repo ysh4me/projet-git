@@ -1,14 +1,22 @@
-#!/bin/bash
 #!/bin/sh
 
-# Check for syntax errors in JS files using ESLint
-npx eslint --fix --ext .js .
+echo "Running pre-commit hook..."
 
-# If ESLint finds any errors, it will stop the commit process
+# Check for JavaScript syntax errors
+npx eslint --fix --ext .js .
 if [ $? -ne 0 ]; then
-  echo "❌ JavaScript syntax errors found. Commit aborted."
+  echo "❌ JavaScript syntax error(s) found. Commit aborted."
   exit 1
 fi
 
-# If everything is okay, print the success message
-echo "HOOK EXÉCUTÉ PAS D'ERREUR"
+# Check for PHP syntax errors
+for file in $(git diff --cached --name-only --diff-filter=AM | grep '\.php$')
+do
+  php -l "$file"
+  if [ $? -ne 0 ]; then
+    echo "❌ Syntax error found in PHP file: $file. Commit aborted."
+    exit 1
+  fi
+done
+
+echo "HOOK EXÉCUTÉ"
