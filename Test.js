@@ -1,2 +1,1 @@
-const foo=   42 
-console.log(foouuu)
+const x = 5; 
