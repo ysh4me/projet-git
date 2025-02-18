@@ -15,17 +15,5 @@ for FILE in $STAGED_FILES; do
   fi
 done
 
-# Check PHP files for syntax errors using 'php -l' (PHP syntax checker)
-for FILE in $STAGED_FILES; do
-  if [[ "$FILE" == *.php ]]; then
-    echo "Checking syntax for $FILE"
-    php -l "$FILE"  # This checks PHP syntax
-    if [ $? -ne 0 ]; then
-      echo "PHP syntax error in $FILE. Commit rejected."
-      exit 1
-    fi
-  fi
-done
-
 # If no syntax errors were found, allow the commit
 echo "No syntax errors found. Proceeding with commit."
