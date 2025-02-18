@@ -1,3 +1,14 @@
 #!/bin/bash
-echo "HOOK EXÉCUTÉ" >&2
-exit 1  # Bloque le commit pour test
+#!/bin/sh
+
+# Check for syntax errors in JS files using ESLint
+npx eslint --fix --ext .js .
+
+# If ESLint finds any errors, it will stop the commit process
+if [ $? -ne 0 ]; then
+  echo "❌ JavaScript syntax errors found. Commit aborted."
+  exit 1
+fi
+
+# If everything is okay, print the success message
+echo "HOOK EXÉCUTÉ PAS D'ERREUR"
