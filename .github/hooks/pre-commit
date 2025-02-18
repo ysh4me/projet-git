@@ -1,19 +1,18 @@
 #!/bin/sh
+# Ce hook empêche les commits si des erreurs de syntaxe sont détectées dans les fichiers JS ou PHP
 
-# Get the list of staged files (files added with 'git add')
+# Liste des fichiers ajoutés
 STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
-
-# Check JavaScript files for syntax errors using Node.js (you can use other tools if needed)
+echo "Fichiers staged : $STAGED_FILES"
+# Vérification de la syntaxe des fichiers JS
 for FILE in $STAGED_FILES; do
   if [[ "$FILE" == *.js ]]; then
-    echo "Checking syntax for $FILE"
-    node -c "$FILE"  # This checks the JavaScript syntax with Node.js
+    echo "Vérification de la syntaxe pour le fichier JS : $FILE"
+    node -c "$FILE"  # Vérifie la syntaxe avec Node.js
     if [ $? -ne 0 ]; then
-      echo "JavaScript syntax error in $FILE. Commit rejected."
+      echo "Erreur de syntaxe JavaScript dans $FILE. Commit rejeté."
       exit 1
     fi
   fi
 done
-
-# If no syntax errors were found, allow the commit
-echo "No syntax errors found. Proceeding with commit."
+echo "Aucune erreur de syntaxe détectée. Commit autorisé."
