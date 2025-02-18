@@ -1,22 +1,31 @@
 #!/bin/sh
 
-echo "Running pre-commit hook..."
+# Get the list of staged files (files added with 'git add')
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
 
-# Check for JavaScript syntax errors
-npx eslint --fix --ext .js .
-if [ $? -ne 0 ]; then
-  echo "❌ JavaScript syntax error(s) found. Commit aborted."
-  exit 1
-fi
-
-# Check for PHP syntax errors
-for file in $(git diff --cached --name-only --diff-filter=AM | grep '\.php$')
-do
-  php -l "$file"
-  if [ $? -ne 0 ]; then
-    echo "❌ Syntax error found in PHP file: $file. Commit aborted."
-    exit 1
+# Check JavaScript files for syntax errors using Node.js (you can use other tools if needed)
+for FILE in $STAGED_FILES; do
+  if [[ "$FILE" == *.js ]]; then
+    echo "Checking syntax for $FILE"
+    node -c "$FILE"  # This checks the JavaScript syntax with Node.js
+    if [ $? -ne 0 ]; then
+      echo "JavaScript syntax error in $FILE. Commit rejected."
+      exit 1
+    fi
   fi
 done
 
-echo "HOOK EXÉCUTÉ"
+# Check PHP files for syntax errors using 'php -l' (PHP syntax checker)
+for FILE in $STAGED_FILES; do
+  if [[ "$FILE" == *.php ]]; then
+    echo "Checking syntax for $FILE"
+    php -l "$FILE"  # This checks PHP syntax
+    if [ $? -ne 0 ]; then
+      echo "PHP syntax error in $FILE. Commit rejected."
+      exit 1
+    fi
+  fi
+done
+
+# If no syntax errors were found, allow the commit
+echo "No syntax errors found. Proceeding with commit."
