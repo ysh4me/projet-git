@@ -5,18 +5,23 @@
   "main": "Test.js",
   "type": "module",
   "scripts": {
+    "prepare": "husky install",
     "lint": "eslint .",
+    "lint-staged": "lint-staged",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs}": [
+      "eslint --fix"
+    ]
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@eslint/eslintrc": "^2.1.4",
     "@eslint/js": "^8.57.0",
-    "@typescript-eslint/eslint-plugin": "^7.0.0",
-    "@typescript-eslint/parser": "^7.0.0",
     "eslint": "^8.57.0",
-    "typescript": "^5.3.3"
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.0"
   }
 }
