@@ -4,7 +4,16 @@
   "description": "Ce projet utilise le workflow Git Flow.",
   "main": "Test.js",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint .",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -16,6 +25,8 @@
     "eslint-define-config": "^2.1.0",
     "eslint-plugin-react": "^7.37.4",
     "globals": "^15.15.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.2.0",
     "typescript-eslint": "^8.24.1"
   }
 }
