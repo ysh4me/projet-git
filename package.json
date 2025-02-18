@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "Ce projet utilise le workflow Git Flow.",
   "main": "Test.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "type": "module",
+  "scripts": {},
   "keywords": [],
   "author": "",
   "license": "ISC",
