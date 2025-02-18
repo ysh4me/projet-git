@@ -1,9 +1,43 @@
-#!/bin/sh
-# Vérifie que le code est valide avec ESLint avant de valider le commit.
+#!/bin/bash
+echo "Hook exécuté"
+exit 1  # Empêche le commit pour vérifier si le hook s’exécute bien
+# Couleurs pour les messages
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
 
-npx eslint . --ext .js --fix
+echo "🔍 Vérification de la structure du code avant commit..."
 
-if [ $? -ne 0 ]; then
-  echo "Linting a échoué. Le commit est bloqué."
-  exit 1
+# Vérification des fichiers PHP
+PHP_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.php$')
+
+if [[ -n "$PHP_FILES" ]]; then
+    for file in $PHP_FILES; do
+        php -l "$file"
+        if [[ $? -ne 0 ]]; then
+            echo -e "${RED}❌ Erreur de syntaxe dans $file${NC}"
+            exit 1
+        fi
+    done
+    echo -e "${GREEN}✅ Aucune erreur PHP détectée.${NC}"
 fi
+
+# Vérification des fichiers JS avec ESLint
+JS_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.js$')
+
+if [[ -n "$JS_FILES" ]]; then
+    if ! command -v eslint &> /dev/null; then
+        echo -e "${RED}❌ ESLint n'est pas installé. Installez-le avec: npm install -g eslint${NC}"
+        exit 1
+    fi
+
+    eslint $JS_FILES
+    if [[ $? -ne 0 ]]; then
+        echo -e "${RED}❌ Problèmes détectés par ESLint.${NC}"
+        exit 1
+    fi
+    echo -e "${GREEN}✅ Aucun problème JS détecté.${NC}"
+fi
+
+echo -e "${GREEN}🎉 Pré-commit validé avec succès !${NC}"
+exit 0

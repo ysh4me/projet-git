@@ -12,6 +12,6 @@ module.exports = {
     '@typescript-eslint'
   ],
   rules: {
-    // tes règles personnalisées ici
+    // your custom rules here
   }
 };
