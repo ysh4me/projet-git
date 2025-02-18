@@ -1,13 +1,27 @@
-import { defineConfig } from 'eslint-define-config';
+import globals from "globals";
+import js from "@eslint/js";
+import tseslint from "@typescript-eslint/eslint-plugin";
+import tsparser from "@typescript-eslint/parser";
 
-export default defineConfig({
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
-  rules: {
-    // Vos règles personnalisées ici
-  },
-});
+export default [
+  js.configs.recommended,
+  {
+    files: ["**/*.{js,mjs,cjs,jsx,ts,tsx}"],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module"
+      },
+      globals: {
+        ...globals.browser
+      }
+    },
+    plugins: {
+      "@typescript-eslint": tseslint
+    },
+    rules: {
+      // Vos règles personnalisées ici
+    }
+  }
+];
