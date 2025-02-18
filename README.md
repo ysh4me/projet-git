@@ -125,6 +125,22 @@ Le projet suit le workflow Git Flow avec les conventions de nommage suivantes :
 - [Code de Conduite](CODE_OF_CONDUCT.md)
 - [Guide de Contribution](CONTRIBUTING.md)
 
+## Gestion des Issues avec Kanban
+
+Nous utilisons un tableau Kanban pour organiser les issues du projet.
+
+- **Colonnes** :
+  - `To Do` : Tâches à commencer.
+  - `In Progress` : Tâches en cours.
+  - `Done` : Tâches terminées.
+
+### Règles :
+- **Lorsqu'une tâche est en cours**, elle passe en `In Progress`.
+- **Lorsqu'une tâche est terminée**, elle passe en `Done`.
+- **Les issues sont liées aux branches Git** pour un meilleur suivi.
+
+🔗 [Voir le tableau Kanban](https://github.com/ysh4me/projet-git/projects)
+
 ## Contributeurs
 
 - [ysh4me](https://github.com/ysh4me)
