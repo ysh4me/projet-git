@@ -1,18 +1,29 @@
 #!/bin/sh
-# Ce hook empêche les commits si des erreurs de syntaxe sont détectées dans les fichiers JS ou PHP
 
-# Liste des fichiers ajoutés
-STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
-echo "Fichiers staged : $STAGED_FILES"
-# Vérification de la syntaxe des fichiers JS
-for FILE in $STAGED_FILES; do
-  if [[ "$FILE" == *.js ]]; then
-    echo "Vérification de la syntaxe pour le fichier JS : $FILE"
-    node -c "$FILE"  # Vérifie la syntaxe avec Node.js
-    if [ $? -ne 0 ]; then
-      echo "Erreur de syntaxe JavaScript dans $FILE. Commit rejeté."
-      exit 1
-    fi
-  fi
-done
-echo "Aucune erreur de syntaxe détectée. Commit autorisé."
+ 
+
+# Vérifie les fichiers modifiés
+
+FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|tsx|json|css|md)$')
+
+if [ -z "$FILES" ]; then
+
+  exit 0
+
+fi
+
+ 
+
+# Vérification avec Prettier
+
+prettier --check $FILES || { echo 'Corrigez le formatage avec Prettier.'; exit 1; }
+
+ 
+
+# Vérification avec ESLint
+
+eslint $FILES --quiet || { echo 'Corrigez les erreurs ESLint.'; exit 1; }
+
+ 
+
+exit 0
