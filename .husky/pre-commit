@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Check JavaScript files for syntax errors using Node.js
+for FILE in $STAGED_FILES; do
+  if [[ "$FILE" == *.js ]]; then
+    echo "Checking syntax for $FILE"
+    node -c "$FILE"  # This checks the JavaScript syntax with Node.js
+    if [ $? -ne 0 ]; then
+      echo "JavaScript syntax error in $FILE. Commit rejected."
+      exit 1
+    fi
+  fi
+done
